@@ -151,12 +151,7 @@ export type ChildSchemaType<p extends JSONSchema7, R extends JSONSchema7Definiti
 	p['$ref'] extends GetKeys<R, ''> ? p['$ref'] extends `#${infer X}` ? GetChildDef<R, p['$ref'], IsResponse> : GetDef<R, p['$ref'], IsResponse> :
 	p['const'] extends JSONSchema7Type ? p['const'] :
 	p['enum'] extends ReadonlyArray<JSONSchema7Type> ? p['enum'][number] :
-	p['type'] extends 'string' ? (
-		p['format'] extends 'date' ? Date :
-		p['format'] extends 'date-time' ? Date :
-		p['format'] extends 'binary' ? RelativeIndexable<number> :
-		string
-	) :
+	p['type'] extends 'string' ? string :
 	p['type'] extends ('null' | 'integer' | 'number' | 'boolean') ? TypeNameToType<p['type']> :
 	p['type'] extends 'object' ? ObjectSchemaTypeDef<p, R, IsResponse> :
 	p['type'] extends 'array' ? (
