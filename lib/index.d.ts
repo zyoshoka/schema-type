@@ -27,12 +27,12 @@ type GetChildDef<References extends JSONSchema7Definition[], Key extends GetKeys
 export type GetRefs<ReferencesRecord extends Record<string, JSONSchema7Definition>> =
 	UnionToArray<ReferencesRecord[keyof ReferencesRecord]>;
 
-export type GetKeys<References extends JSONSchema7Definition[], p extends string = '', R extends References[number] = References[number]> = 
+export type GetKeys<References extends JSONSchema7Definition[], p extends string = '', R extends References[number] = References[number]> =
 	R extends any ? R['$id'] extends `${p}${infer x}` ? x | (keyof R['$defs'] extends string ? `${x}#/$defs/${keyof R['$defs']}` : never) : never : never;
 export type GetRefsKeys<ReferencesRecord extends Record<string, JSONSchema7Definition>, p extends string = '', R extends JSONSchema7 = ReferencesRecord[keyof ReferencesRecord]> =
 	R extends any ? R['$id'] extends `${p}${infer x}` ? x | (keyof R['$defs'] extends string ? `${x}#/$defs/${keyof R['$defs']}` : never) : never : never;
 
-export type Serialized<T> = 
+export type Serialized<T> =
 	T extends NonNullable<Date>
 		? string
 	: T extends RelativeIndexable<number>
@@ -43,7 +43,7 @@ export type Serialized<T> =
 				? Array<Serialized<U>>
 	: T;
 
-export type WeakSerialized<T> = 
+export type WeakSerialized<T> =
 	T extends NonNullable<Date>
 		? T | string
 	: T extends RelativeIndexable<number>
@@ -71,7 +71,7 @@ type Projected<T> = T extends Record<string, any> ? { [K in keyof T]: T[K] } : T
 // deceive TypeScript with UnionToIntersection (or more precisely, `infer` expression within it).
 export type ObjType<s extends Obj, RP extends ReadonlyArray<keyof s>, R extends JSONSchema7Definition[], IsResponse extends boolean> =
 	Projected<
-		(RP extends NonNullable<ReadonlyArray<keyof s>> ? 
+		(RP extends NonNullable<ReadonlyArray<keyof s>> ?
 			{ -readonly [P in keyof s]?: s[P] extends NonNullable<JSONSchema7> ? ChildSchemaType<s[P], R, IsResponse> : s[P] } &
 			{ -readonly [Q in RP[number] as RequiredKey<s, Q, R>]-?: s[Q] extends NonNullable<JSONSchema7> ? ChildSchemaType<s[Q], R, IsResponse>: s[Q] }
 		:
@@ -97,7 +97,7 @@ type AllOfSchema<T extends ReadonlyArray<JSONSchema7>, R extends JSONSchema7Defi
 		: never : unknown;
 
 // https://stackoverflow.com/questions/54938141/typescript-convert-union-to-intersection
-// Get intersection from union 
+// Get intersection from union
 type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never;
 
 // https://github.com/misskey-dev/misskey/pull/8144#discussion_r785287552

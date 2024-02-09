@@ -197,7 +197,7 @@ describe('SchemaType', () => {
 					{ required: ['hoge'] },
 					{ required: ['fuga'] },
 				],
-				required: []
+				required: [],
 			} as const satisfies _.JSONSchema7;
 			type S = _.SchemaType<typeof s, []>;
 			expectType<S>({ hoge: 'string' });
@@ -234,7 +234,7 @@ describe('SchemaType', () => {
 					allOf: [
 						{ type: 'string' },
 						{ type: 'string' },
-					]
+					],
 				},
 			} as const satisfies _.JSONSchema7;
 			type S = _.SchemaType<typeof s, []>;
@@ -248,7 +248,7 @@ describe('SchemaType', () => {
 					oneOf: [
 						{ type: 'string' },
 						{ type: 'null' },
-					]
+					],
 				},
 			} as const satisfies _.JSONSchema7;
 			type S = _.SchemaType<typeof s, []>;
@@ -262,7 +262,7 @@ describe('SchemaType', () => {
 					anyOf: [
 						{ type: 'string' },
 						{ type: 'null' },
-					]
+					],
 				},
 			} as const satisfies _.JSONSchema7;
 			type S = _.SchemaType<typeof s, []>;
@@ -382,10 +382,10 @@ describe('SchemaType', () => {
 						type: 'object',
 						properties: {
 							bar: {
-								$ref: '#/$defs/bar'
+								$ref: '#/$defs/bar',
 							},
 						},
-					}
+					},
 				},
 				type: 'object',
 				properties: {
@@ -417,7 +417,7 @@ describe('SchemaType', () => {
 								},
 								required: ['text', 'count'],
 							},
-						}
+						},
 					},
 					$id: 'https://example.com/schemas/Note',
 					type: 'object',
@@ -432,7 +432,7 @@ describe('SchemaType', () => {
 							type: 'array',
 							items: { $ref: 'https://example.com/schemas/Note' },
 						},
-						umm: { $ref: 'https://example.com/schemas/Umm' }
+						umm: { $ref: 'https://example.com/schemas/Umm' },
 					},
 					required: ['text', 'replies'],
 				},
@@ -531,8 +531,8 @@ describe('SchemaType', () => {
 					},
 					bar: {
 						type: 'string',
-						format: 'binary'
-					}
+						format: 'binary',
+					},
 				},
 				required: ['foo'],
 			} as const satisfies _.JSONSchema7;
@@ -556,17 +556,17 @@ describe('SchemaType', () => {
 						oneOf: [{
 							type: 'string',
 							format: 'date-time',
-						}, { type: 'null' }]
+						}, { type: 'null' }],
 					},
 					bar: {
 						oneOf: [{
 							type: 'string',
 							format: 'binary',
-						}, { type: 'null' }]
+						}, { type: 'null' }],
 					},
 					arr: {
 						type: 'array',
-					}
+					},
 				},
 				required: ['foo'],
 			} as const satisfies _.JSONSchema7;
